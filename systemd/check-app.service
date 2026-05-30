@@ -1,0 +1,7 @@
+[Unit]
+Description=Проверка здоровья FastAPI
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/chack_ap.sh

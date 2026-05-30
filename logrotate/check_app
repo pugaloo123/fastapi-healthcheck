@@ -1,0 +1,9 @@
+/var/log/check_app.log
+/opt/fastapi-counter/app.log {
+    daily
+    rotate 3
+    compress
+    missingok
+    notifempty
+    create 0644 root root
+}

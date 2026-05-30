@@ -1,0 +1,10 @@
+[Unit]
+Description=Запускать check-app каждую минуту
+
+[Timer]
+OnBootSec=30s
+OnUnitActiveSec=1min
+Unit=check-app.service
+
+[Install]
+WantedBy=timers.target

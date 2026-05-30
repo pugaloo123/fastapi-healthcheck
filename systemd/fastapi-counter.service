@@ -1,0 +1,14 @@
+[Unit]
+Description=FastAPI Counter App
+After=network.target
+
+[Service]
+Type=simple
+User=www-data #запуск не от рута
+WorkingDirectory=/opt/fastapi-counter #Папка где лежит проект на сервере
+ExecStart=/opt/fastapi-counter/venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8000 #Запуск из виртуального окржуения
+Restart=on-failure #перезапуск если упадет
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
