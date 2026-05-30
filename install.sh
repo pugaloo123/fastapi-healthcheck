@@ -4,13 +4,16 @@ set -e
 
 echo "Установка FastAPI Counter"
 
-#Проверка что запущен от root
+# Проверка что запущен от root
 if [ "$EUID" -ne 0 ]; then
     echo "Запустить от root: sudo ./install.sh"
     exit 1
 fi
 
 echo "Устанавливаем зависимости"
+apt update && apt install -y python3 python3-pip python3.12-venv curl
+
+echo "Копируем приложение"
 cp -r . /opt/fastapi-counter
 cd /opt/fastapi-counter
 
@@ -25,6 +28,7 @@ chmod +x /usr/local/bin/check_app.sh
 echo "Копируем systemd unit-файлы"
 cp systemd/fastapi-counter.service /etc/systemd/system/
 cp systemd/check-app.service /etc/systemd/system/
+cp systemd/check-app.timer /etc/systemd/system/
 
 echo "Активируем сервисы"
 systemctl daemon-reload
